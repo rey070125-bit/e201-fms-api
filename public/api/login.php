@@ -27,7 +27,7 @@ if ($username === '' || $password === '') {
  * - role            (optional)
  */
 
-$stmt = $conn->prepare("SELECT id, username, password, role FROM admins WHERE username=? LIMIT 1");
+$stmt = $conn->prepare("SELECT id, username, password_hash, role FROM admins WHERE username=? LIMIT 1");
 if (!$stmt) {
     echo json_encode(["ok" => false, "error" => "SQL prepare failed"]);
     exit;
