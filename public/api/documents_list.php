@@ -15,16 +15,19 @@ function out($arr, $code=200){
 }
 
 try {
+
   $auth = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
   if (!preg_match('/Bearer\s+(.+)/', $auth, $m)) {
     out(["ok"=>false,"error"=>"Missing token"], 401);
   }
 
-  // TEMP: If you want to enforce the temp token, uncomment:
-  // $token = trim($m[1]);
-  // if ($token !== "test_token_123") out(["ok"=>false,"error"=>"Invalid token"], 401);
+  // TEMP token check
+  $token = trim($m[1]);
+  if ($token !== "test_token_123") {
+    out(["ok"=>false,"error"=>"Invalid token"], 401);
+  }
 
-  // ✅ FIX: removed `category` (your table doesn't have it)
+  // ✅ SAFE QUERY (no category column)
   $res = $conn->query("SELECT id, filename, uploaded_at FROM documents ORDER BY id DESC");
 
   $docs = [];
