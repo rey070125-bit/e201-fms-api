@@ -1,5 +1,10 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
+
+// Allow Android app access
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
 ini_set('display_errors', '0');
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
